@@ -18,6 +18,11 @@
 #ifndef __ASM_EXCEPTION_H
 #define __ASM_EXCEPTION_H
 
+<<<<<<< HEAD
+=======
+#include <linux/interrupt.h>
+
+>>>>>>> be7635e... arch, ftrace: for KASAN put hard/soft IRQ entries into separate sections
 #define __exception	__attribute__((section(".exception.text")))
 #define __exception_irq_entry	__exception
 
