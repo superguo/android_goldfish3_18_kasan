@@ -3366,8 +3366,21 @@ free_done:
 static inline void __cache_free(struct kmem_cache *cachep, void *objp,
 				unsigned long caller)
 {
+	/* Put the object into the quarantine, don't touch it for now. */
+	if (kasan_slab_free(cachep, objp))
+		return;
+
+	___cache_free(cachep, objp, caller);
+}
+
+<<<<<<< HEAD
+=======
+void ___cache_free(struct kmem_cache *cachep, void *objp,
+		unsigned long caller)
+{
 	struct array_cache *ac = cpu_cache_get(cachep);
 
+>>>>>>> 55834c5... mm: kasan: initial memory quarantine implementation
 	check_irq_off();
 	kmemleak_free_recursive(objp, cachep->flags);
 	objp = cache_free_debugcheck(cachep, objp, caller);
