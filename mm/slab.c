@@ -4279,6 +4279,16 @@ size_t ksize(const void *objp)
 	if (unlikely(objp == ZERO_SIZE_PTR))
 		return 0;
 
+<<<<<<< HEAD
 	return virt_to_cache(objp)->object_size;
+=======
+	size = virt_to_cache(objp)->object_size;
+	/* We assume that ksize callers could use the whole allocated area,
+	 * so we need to unpoison this area.
+	 */
+	kasan_unpoison_shadow(objp, size);
+
+	return size;
+>>>>>>> 4ebb31a4... mm, kasan: don't call kasan_krealloc() from ksize().
 }
 EXPORT_SYMBOL(ksize);
