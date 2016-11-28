@@ -97,5 +97,14 @@ quiet_cmd_syscalls = CALL    $<
 missing-syscalls: scripts/checksyscalls.sh $(offsets-file) FORCE
 	$(call cmd,syscalls)
 
+#####
+# 4) Generate constants for Python GDB integration
+#
+
+extra-$(CONFIG_GDB_SCRIPTS) += build_constants_py
+
+build_constants_py: $(obj)/$(bounds-file)
+	@$(MAKE) $(build)=scripts/gdb/linux $@
+
 # Keep these two files during make clean
 no-clean-files := $(bounds-file) $(offsets-file)

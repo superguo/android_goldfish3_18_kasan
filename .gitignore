@@ -96,3 +96,11 @@ x509.genkey
 
 # Kconfig presets
 all.config
+#
+bp.list
+gdb.sh
+peda-session-vmlinux.txt
+scripts/bin2c
+start_gdb_kernel.sh
+vmlinux-gdb.py
+
