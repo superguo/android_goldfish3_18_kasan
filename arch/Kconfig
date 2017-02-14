@@ -495,7 +495,7 @@ config HAVE_IRQ_EXIT_ON_IRQ_STACK
 
 config PGTABLE_LEVELS
 	int
-	default 2
+	default 4
 
 config ARCH_HAS_ELF_RANDOMIZE
 	bool
