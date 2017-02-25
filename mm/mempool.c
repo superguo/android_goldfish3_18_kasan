@@ -133,7 +133,6 @@ static void *remove_element(mempool_t *pool, gfp_t flags)
 	BUG_ON(pool->curr_nr < 0);
 	kasan_unpoison_element(pool, element, flags);
 	check_element(pool, element);
-	kasan_unpoison_element(pool, element);
 	return element;
 }
 
