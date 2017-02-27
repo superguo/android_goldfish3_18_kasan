@@ -354,7 +354,7 @@ static inline struct kmem_cache *slab_pre_alloc_hook(struct kmem_cache *s,
 	if (should_failslab(s, flags))
 		return NULL;
 
-	return memcg_kmem_get_cache(s, flags);
+	return s;
 }
 
 static inline void slab_post_alloc_hook(struct kmem_cache *s, gfp_t flags,
@@ -371,7 +371,6 @@ static inline void slab_post_alloc_hook(struct kmem_cache *s, gfp_t flags,
 					 s->flags, flags);
 		kasan_slab_alloc(s, object, flags);
 	}
-	memcg_kmem_put_cache(s);
 }
 
 #ifndef CONFIG_SLOB
