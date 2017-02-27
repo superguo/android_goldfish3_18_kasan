@@ -807,7 +807,9 @@ static const struct memdev {
 	const struct file_operations *fops;
 	fmode_t fmode;
 } devlist[] = {
+#ifdef CONFIG_DEVMEM
 	 [1] = { "mem", 0, &mem_fops, FMODE_UNSIGNED_OFFSET },
+#endif
 #ifdef CONFIG_DEVKMEM
 	 [2] = { "kmem", 0, &kmem_fops, FMODE_UNSIGNED_OFFSET },
 #endif
