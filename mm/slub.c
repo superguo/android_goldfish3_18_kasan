@@ -1310,6 +1310,29 @@ static inline void *slab_free_hook(struct kmem_cache *s, void *x)
 	return freeptr;
 }
 
+static inline void slab_free_freelist_hook(struct kmem_cache *s,
+					   void *head, void *tail)
+{
+/*
+ * Compiler cannot detect this function can be removed if slab_free_hook()
+ * evaluates to nothing.  Thus, catch all relevant config debug options here.
+ */
+#if defined(CONFIG_KMEMCHECK) ||		\
+	defined(CONFIG_LOCKDEP)	||		\
+	defined(CONFIG_DEBUG_KMEMLEAK) ||	\
+	defined(CONFIG_DEBUG_OBJECTS_FREE) ||	\
+	defined(CONFIG_KASAN)
+
+	void *object = head;
+	void *tail_obj = tail ? : head;
+
+	do {
+		slab_free_hook(s, object);
+	} while ((object != tail_obj) &&
+		 (object = get_freepointer(s, object)));
+#endif
+}
+
 static void setup_object(struct kmem_cache *s, struct page *page,
 				void *object)
 {
