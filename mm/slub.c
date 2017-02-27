@@ -2430,7 +2430,7 @@ static void *__slab_alloc(struct kmem_cache *s, gfp_t gfpflags, int node,
 static __always_inline void *slab_alloc_node(struct kmem_cache *s,
 		gfp_t gfpflags, int node, unsigned long addr)
 {
-	void **object;
+	void *object;
 	struct kmem_cache_cpu *c;
 	struct page *page;
 	unsigned long tid;
@@ -2500,7 +2500,7 @@ redo:
 	if (unlikely(gfpflags & __GFP_ZERO) && object)
 		memset(object, 0, s->object_size);
 
-	slab_post_alloc_hook(s, gfpflags, object);
+	slab_post_alloc_hook(s, gfpflags, 1, &object);
 
 	return object;
 }
