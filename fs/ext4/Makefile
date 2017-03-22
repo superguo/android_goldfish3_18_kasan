@@ -1,3 +1,4 @@
+KASAN_SANITIZE := y
 #
 # Makefile for the linux ext4-filesystem routines.
 #

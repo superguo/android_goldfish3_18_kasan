@@ -2,6 +2,7 @@
 # Makefile for some libs needed in the kernel.
 #
 
+KASAN_SANITIZE := y
 ifdef CONFIG_FUNCTION_TRACER
 ORIG_CFLAGS := $(KBUILD_CFLAGS)
 KBUILD_CFLAGS = $(subst -pg,,$(ORIG_CFLAGS))

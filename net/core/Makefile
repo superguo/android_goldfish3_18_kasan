@@ -1,3 +1,4 @@
+KASAN_SANITIZE:=y
 #
 # Makefile for the Linux networking core.
 #

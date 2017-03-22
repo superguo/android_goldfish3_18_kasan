@@ -1,3 +1,4 @@
+SAN_SANITIZE := y
 #
 # Makefile for the Linux filesystems.
 #
